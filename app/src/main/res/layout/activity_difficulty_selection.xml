@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<Button
+		android:id="@+id/difficulty_selection_back_button"
+		android:text="Back"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		/>
+
+	<TextView
+		android:id="@+id/difficulty_selection_title"
+		android:text="Difficulty Selection"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintBottom_toTopOf="@id/difficulty_selection_radio_group"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		/>
+
+	<RadioGroup
+		android:id="@+id/difficulty_selection_radio_group"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		>
+
+		<RadioButton
+			android:id="@+id/difficulty_radio_easy"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Easy"
+			android:checked="true"
+			/>
+
+		<RadioButton
+			android:id="@+id/difficulty_radio_medium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Medium"
+			/>
+
+		<RadioButton
+			android:id="@+id/difficulty_radio_hard"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Hard"
+			/>
+
+	</RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
