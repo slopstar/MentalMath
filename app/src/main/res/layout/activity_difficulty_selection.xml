@@ -13,48 +13,126 @@
 		app:layout_constraintStart_toStartOf="parent"
 		/>
 
-	<TextView
-		android:id="@+id/difficulty_selection_title"
-		android:text="Difficulty Selection"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		app:layout_constraintBottom_toTopOf="@id/difficulty_selection_radio_group"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		/>
-
-	<RadioGroup
-		android:id="@+id/difficulty_selection_radio_group"
+	<LinearLayout
+		android:id="@+id/difficulty_selection_linear_layout"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintBottom_toBottomOf="parent"
+		android:orientation="vertical"
 		>
 
-		<RadioButton
-			android:id="@+id/difficulty_radio_easy"
+		<!-- Amount of numbers per expression-->
+		<TextView
+			android:text="max amount of numbers"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Easy"
+			/>
+		<RadioGroup
+			android:id="@+id/max_numbers_radio_group"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			>
+			<RadioButton
+				android:id="@+id/max_numbers_2_rb"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="2"
+				android:tag="2"
+				android:checked="true"
+				/>
+			<RadioButton
+				android:id="@+id/max_numbers_3_rb"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="3"
+				android:tag="3"
+				/>
+			<RadioButton
+				android:id="@+id/max_numbers_4_rb"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="4"
+				android:tag="4"
+				/>
+		</RadioGroup>
+
+		<!-- Digits per number-->
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="max digits per number"
+			/>
+		<RadioGroup
+			android:id="@+id/max_digits_radio_group"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			>
+			<RadioButton
+				android:id="@+id/max_digits_1_rb"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="1"
+				android:tag="1"
+				android:checked="true"
+				/>
+			<RadioButton
+				android:id="@+id/max_digits_2_rb"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="2"
+				android:tag="2"
+				/>
+			<RadioButton
+				android:id="@+id/max_digits_3_rb"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="3"
+				android:tag="3"
+				/>
+		</RadioGroup>
+
+		<!-- Operations-->
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="operations"
+			/>
+		<CheckBox
+			android:id="@+id/operation_addition_cb"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="addition (+)"
+			android:tag="addition"
 			android:checked="true"
 			/>
-
-		<RadioButton
-			android:id="@+id/difficulty_radio_medium"
+		<CheckBox
+			android:id="@+id/operation_subtraction_cb"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Medium"
+			android:text="subtraction (-)"
+			android:tag="subtraction"
+			android:checked="true"
 			/>
-
-		<RadioButton
-			android:id="@+id/difficulty_radio_hard"
+		<CheckBox
+			android:id="@+id/operation_multiplication_cb"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Hard"
+			android:text="multiplication (×)"
+			android:tag="multiplication"
+			/>
+		<CheckBox
+			android:id="@+id/operation_division_cb"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="division (÷)"
+			android:tag="division"
 			/>
 
-	</RadioGroup>
+	</LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

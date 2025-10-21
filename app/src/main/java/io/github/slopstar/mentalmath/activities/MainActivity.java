@@ -15,7 +15,6 @@ public class MainActivity extends Activity {
 	private TextView difficultyLevelTextView;
 	private Button setDifficultyButton;
 	private ExpressionGenerator expressionGenerator;
-	private String difficulty;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +24,6 @@ public class MainActivity extends Activity {
 		// Initialize UI components
 		// --- Non-interactive components ---
 		expressionTextView = findViewById(R.id.expression_textview);
-		difficultyLevelTextView = findViewById(R.id.difficulty_level_textview);
-		difficulty = io.github.slopstar.mentalmath.utils.PreferencesUtil.getDifficulty(this);
-		difficultyLevelTextView.setText(difficulty);
 
 		// --- Interactive components ---
 		generateExpressionButton = findViewById(R.id.generate_expression_button);
@@ -53,10 +49,5 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		String newDifficulty = io.github.slopstar.mentalmath.utils.PreferencesUtil.getDifficulty(this);
-		if (!newDifficulty.equals(difficulty)) {
-			difficulty = newDifficulty;
-			difficultyLevelTextView.setText(difficulty);
-		}
 	}
 }

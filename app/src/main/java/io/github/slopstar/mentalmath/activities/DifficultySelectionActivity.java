@@ -2,6 +2,8 @@ package io.github.slopstar.mentalmath.activities;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.activity.ComponentActivity;
@@ -18,45 +20,26 @@ public class DifficultySelectionActivity extends ComponentActivity {
 
 		// --- Initialize interactive components ---
 		Button backButton = findViewById(R.id.difficulty_selection_back_button);
-		RadioGroup difficultyRadioGroup = findViewById(R.id.difficulty_selection_radio_group);
 
-		// --- Load saved difficulty selection ---
-		String saved = io.github.slopstar.mentalmath.utils.PreferencesUtil.getDifficulty(this);
-		switch (saved) {
-			case "easy":
-				difficultyRadioGroup.check(R.id.difficulty_radio_easy);
-				break;
-			case "medium":
-				difficultyRadioGroup.check(R.id.difficulty_radio_medium);
-				break;
-			case "hard":
-				difficultyRadioGroup.check(R.id.difficulty_radio_hard);
-				break;
-		}
+		RadioGroup maxNumbersGroup = findViewById(R.id.max_numbers_radio_group);
+		int checkedId = maxNumbersGroup.getCheckedRadioButtonId();
 
-		// --- Radio group listener ---
-		difficultyRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-					String selectedDifficulty;
-					if (checkedId == R.id.difficulty_radio_easy) {
-						selectedDifficulty = "easy";
-					} else if (checkedId == R.id.difficulty_radio_medium) {
-						selectedDifficulty = "medium";
-					} else if (checkedId == R.id.difficulty_radio_hard) {
-						selectedDifficulty = "hard";
-					} else {
-						return; // unknown selection
-					}
+		RadioGroup maxDigitsGroup = findViewById(R.id.max_digits_radio_group);
+		int checkedIdDigits = maxDigitsGroup.getCheckedRadioButtonId();
 
-					io.github.slopstar.mentalmath.utils.PreferencesUtil.saveDifficulty(this, selectedDifficulty);
-		});
+		CheckBox operationAddition = findViewById(R.id.operation_addition_cb);
+		CheckBox operationSubtraction = findViewById(R.id.operation_subtraction_cb);
+		CheckBox operationMultiplication = findViewById(R.id.operation_multiplication_cb);
+		CheckBox operationDivision = findViewById(R.id.operation_division_cb);
 
-		// --- Button listeners ---
+		// --- Exiting the activity ---
+		// Back button
 		backButton.setOnClickListener(v -> {
 			// simply finish this activity to return to the previous one
 			finish();
 		});
 
-		// Handle system back gestures and hardware back consistently using the OnBackPressedDispatcher
+		// System back button
 		OnBackPressedCallback callback = new OnBackPressedCallback(true) {
 			@Override
 			public void handleOnBackPressed() {
