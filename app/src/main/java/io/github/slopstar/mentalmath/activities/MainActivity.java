@@ -31,11 +31,10 @@ public class MainActivity extends Activity {
 
 		// Methods
 		// --- method utils ---
-		expressionGenerator = new ExpressionGenerator();
 
 		// --- button listeners ---
 		generateExpressionButton.setOnClickListener(v -> {
-			String expression = expressionGenerator.generateRandomExpression(difficulty);
+			String expression = expressionGenerator.generateRandomExpression();
 			expressionTextView.setText(String.valueOf(expression));
 		});
 
