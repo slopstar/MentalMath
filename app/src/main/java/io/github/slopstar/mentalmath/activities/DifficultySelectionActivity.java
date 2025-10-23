@@ -23,30 +23,76 @@ public class DifficultySelectionActivity extends ComponentActivity {
 		Button backButton = findViewById(R.id.difficulty_selection_back_button);
 
 		RadioGroup maxNumbersGroup = findViewById(R.id.max_numbers_radio_group);
-		int checkedIdNumbers = maxNumbersGroup.getCheckedRadioButtonId();
-
 		RadioGroup maxDigitsGroup = findViewById(R.id.max_digits_radio_group);
-		int checkedIdDigits = maxDigitsGroup.getCheckedRadioButtonId();
 
 		CheckBox operationAddition = findViewById(R.id.operation_addition_cb);
 		CheckBox operationSubtraction = findViewById(R.id.operation_subtraction_cb);
 		CheckBox operationMultiplication = findViewById(R.id.operation_multiplication_cb);
 		CheckBox operationDivision = findViewById(R.id.operation_division_cb);
 
+		// --- Initialize UI from persisted preferences ---
+		int prefMaxNumbers = PreferencesUtil.getMaxNumbers(this);
+		switch (prefMaxNumbers) {
+			case 3:
+				maxNumbersGroup.check(R.id.max_numbers_3_rb);
+				break;
+			case 4:
+				maxNumbersGroup.check(R.id.max_numbers_4_rb);
+				break;
+			case 2:
+			default:
+				maxNumbersGroup.check(R.id.max_numbers_2_rb);
+				break;
+		}
+
+		int prefMaxDigits = PreferencesUtil.getMaxDigits(this);
+		switch (prefMaxDigits) {
+			case 2:
+				maxDigitsGroup.check(R.id.max_digits_2_rb);
+				break;
+			case 3:
+				maxDigitsGroup.check(R.id.max_digits_3_rb);
+				break;
+			case 1:
+			default:
+				maxDigitsGroup.check(R.id.max_digits_1_rb);
+				break;
+		}
+
+		operationAddition.setChecked(PreferencesUtil.isAdditionEnabled(this));
+		operationSubtraction.setChecked(PreferencesUtil.isSubtractionEnabled(this));
+		operationMultiplication.setChecked(PreferencesUtil.isMultiplicationEnabled(this));
+		operationDivision.setChecked(PreferencesUtil.isDivisionEnabled(this));
+
 		// --- Handling user input ---
 		// Max numbers selection
-		maxNumbersGroup.setOnCheckedChangeListener((group, checkedId1) -> {
-			RadioButton selectedButton = findViewById(checkedIdNumbers);
-			int maxNumbers = Integer.parseInt(selectedButton.getText().toString());
-			// Save the selected max numbers to preferences
-			PreferencesUtil.setMaxNumbers(this, maxNumbers);
+		maxNumbersGroup.setOnCheckedChangeListener((group, checkedId) -> {
+			RadioButton selectedButton = findViewById(checkedId);
+			if (selectedButton != null) {
+				Object tag = selectedButton.getTag();
+				int maxNumbers;
+				try {
+					maxNumbers = Integer.parseInt(String.valueOf(tag != null ? tag : selectedButton.getText()));
+				} catch (NumberFormatException e) {
+					return;
+				}
+				PreferencesUtil.setMaxNumbers(this, maxNumbers);
+			}
 		});
 
 		// Max digits selection
-		maxDigitsGroup.setOnCheckedChangeListener((group, checkedId1) -> {
-			RadioButton selectedButton = findViewById(checkedIdDigits);
-			int maxDigits = Integer.parseInt(selectedButton.getText().toString());
-			PreferencesUtil.setMaxDigits(this, maxDigits);
+		maxDigitsGroup.setOnCheckedChangeListener((group, checkedId) -> {
+			RadioButton selectedButton = findViewById(checkedId);
+			if (selectedButton != null) {
+				Object tag = selectedButton.getTag();
+				int maxDigits;
+				try {
+					maxDigits = Integer.parseInt(String.valueOf(tag != null ? tag : selectedButton.getText()));
+				} catch (NumberFormatException e) {
+					return;
+				}
+				PreferencesUtil.setMaxDigits(this, maxDigits);
+			}
 		});
 
 		// Operation selection

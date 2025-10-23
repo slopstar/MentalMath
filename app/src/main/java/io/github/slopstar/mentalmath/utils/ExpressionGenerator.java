@@ -1,7 +1,6 @@
 package io.github.slopstar.mentalmath.utils;
 
 import android.content.Context;
-import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +55,29 @@ public class ExpressionGenerator {
 		return rand.nextInt(bound);
 	}
 
+	private String generateRandomOperation() {
+		if (enabledOperations.isEmpty()) {
+			throw new IllegalStateException("Must enable at least one operation");
+		}
+
+		return enabledOperations.get(rand.nextInt(enabledOperations.size()));
+	}
+
 	// --- Full expression ---
 	public String generateRandomExpression() {
+		int numCount = rand.nextInt(maxNumbers - 1) + 2; // at least 2 numbers
+		StringBuilder expressionBuilder = new StringBuilder();
 
+		for (int i = 0; i < numCount; i++) {
+			int number = generateRandomNumber(maxDigits);
+			expressionBuilder.append(number);
+
+			if (i < numCount - 1) {
+				String operation = generateRandomOperation();
+				expressionBuilder.append(" ").append(operation).append(" ");
+			}
+		}
+
+		return expressionBuilder.toString();
 	}
 }

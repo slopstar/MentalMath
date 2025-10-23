@@ -12,7 +12,6 @@ import io.github.slopstar.mentalmath.utils.ExpressionGenerator;
 public class MainActivity extends Activity {
 	private TextView expressionTextView;
 	private Button generateExpressionButton;
-	private TextView difficultyLevelTextView;
 	private Button setDifficultyButton;
 	private ExpressionGenerator expressionGenerator;
 
@@ -20,6 +19,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		// Initialize ExpressionGenerator
+		expressionGenerator = new ExpressionGenerator(this);
 
 		// Initialize UI components
 		// --- Non-interactive components ---
@@ -42,11 +44,12 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(MainActivity.this, DifficultySelectionActivity.class);
 			startActivity(intent);
 		});
-
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		// Refresh generator with latest preferences when returning to this activity
+		expressionGenerator = new ExpressionGenerator(this);
 	}
 }
